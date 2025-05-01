@@ -1,2 +1,1 @@
-# PINNs-For-Non-Linear-Odes
-This repository explores the use of Physics-Informed Neural Networks (PINNs) to solve nonlinear differential equations and estimate parameters in dynamical systems
+This repository explores the use of Physics-Informed Neural Networks (PINNs) to solve nonlinear differential equations and estimate parameters in dynamical systems. By embedding physical laws into neural networks, PINNs offer accurate and efficient solutions compared to traditional numerical methods. The project includes case studies demonstrating the effectiveness of PINNs in real-world scientific and engineering applications.
