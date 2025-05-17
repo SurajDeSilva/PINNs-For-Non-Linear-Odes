@@ -27,3 +27,45 @@ In this thesis-based project, we demonstrate how an *inverse PINN* can learn unk
 - **Case Studies and Realistic Scenarios**  
   Validated the approach on both simple nonlinear ODEs and realistic damped oscillators (including non-homogeneous systems with external forcing), showing adaptability to real-world dynamics.
 
+  ## 🏗️ Architecture and Methods
+
+### 🔧 Neural Network Architecture
+- Fully-connected feedforward neural network.
+- Input: scalar time `t`; Output: scalar displacement `x(t)`.
+- Architecture: 5 hidden layers with **Tanh** activation functions.
+- Built using **PyTorch**, leveraging automatic differentiation for computing derivatives.
+
+### 🧮 Physics-Informed Loss Function
+The total loss combines three components:
+
+- **Physics Loss** (`L_physics`):  
+  Penalizes violations of the governing ODE:  
+  \[
+  m \cdot \frac{d^2x}{dt^2} + \mu \cdot \frac{dx}{dt} + kx = 0
+  \]
+
+- **Data Loss** (`L_data`):  
+  Measures the difference between predicted and observed displacement values.
+
+- **Initial Condition Loss** (`L_initial`):  
+  Ensures the network satisfies initial displacement and velocity conditions.
+
+- **Total Loss Function**:
+  \[
+  L = \lambda_1 \cdot L_{physics} + \lambda_2 \cdot L_{data} + \lambda_3 \cdot L_{initial}
+  \]
+
+### ⚙️ Optimization
+- Optimizer: **Adam**
+- Techniques: Learning rate scheduling, early stopping, weight decay.
+- Input normalization and gradient clipping used for training stability.
+- Parameters (μ, k) are trainable alongside network weights.
+
+### 🧪 Two-Input Architecture
+- For non-homogeneous systems, a second input (e.g., `sin(t)`) is added.
+- Helps the network model systems with external forcing terms:  
+  \[
+  m \cdot \frac{d^2x}{dt^2} + \mu \cdot \frac{dx}{dt} + kx = A \cdot \sin(\omega t)
+  \]
+
+
