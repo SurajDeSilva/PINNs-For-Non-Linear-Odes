@@ -27,7 +27,7 @@ In this thesis-based project, we demonstrate how an *inverse PINN* can learn unk
 - **Case Studies and Realistic Scenarios**  
   Validated the approach on both simple nonlinear ODEs and realistic damped oscillators (including non-homogeneous systems with external forcing), showing adaptability to real-world dynamics.
 
-  ## 🏗️ Architecture and Methods
+ ## 🏗️ Architecture and Methods
 
 ### 🔧 Neural Network Architecture
 - Fully-connected feedforward neural network.
@@ -38,34 +38,29 @@ In this thesis-based project, we demonstrate how an *inverse PINN* can learn unk
 ### 🧮 Physics-Informed Loss Function
 The total loss combines three components:
 
-- **Physics Loss** (`L_physics`):  
+- **Physics Loss (`L_physics`)**:  
   Penalizes violations of the governing ODE:  
-  \[
-  m \cdot \frac{d^2x}{dt^2} + \mu \cdot \frac{dx}{dt} + kx = 0
-  \]
+  `m * d²x/dt² + μ * dx/dt + k * x = 0`
 
-- **Data Loss** (`L_data`):  
-  Measures the difference between predicted and observed displacement values.
+- **Data Loss (`L_data`)**:  
+  Measures the mean squared error between predicted and observed displacement values.
 
-- **Initial Condition Loss** (`L_initial`):  
-  Ensures the network satisfies initial displacement and velocity conditions.
+- **Initial Condition Loss (`L_initial`)**:  
+  Ensures the network satisfies known initial displacement and velocity values.
 
-- **Total Loss Function**:
-  \[
-  L = \lambda_1 \cdot L_{physics} + \lambda_2 \cdot L_{data} + \lambda_3 \cdot L_{initial}
-  \]
+- **Total Loss Function**:  
+  `L_total = λ1 * L_physics + λ2 * L_data + λ3 * L_initial`
 
 ### ⚙️ Optimization
 - Optimizer: **Adam**
-- Techniques: Learning rate scheduling, early stopping, weight decay.
-- Input normalization and gradient clipping used for training stability.
-- Parameters (μ, k) are trainable alongside network weights.
+- Techniques: Learning rate scheduling, early stopping, and weight decay.
+- Input normalization and gradient clipping used for stability.
+- Physical parameters `μ` and `k` are trainable during optimization.
 
 ### 🧪 Two-Input Architecture
-- For non-homogeneous systems, a second input (e.g., `sin(t)`) is added.
-- Helps the network model systems with external forcing terms:  
-  \[
-  m \cdot \frac{d^2x}{dt^2} + \mu \cdot \frac{dx}{dt} + kx = A \cdot \sin(\omega t)
-  \]
+- For non-homogeneous systems, an additional input (e.g., `sin(t)`) is added.
+- Helps model systems with external forcing like:  
+  `m * d²x/dt² + μ * dx/dt + k * x = A * sin(ωt)`
+
 
 
