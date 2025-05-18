@@ -95,7 +95,7 @@ This project includes several experiments to test the performance, accuracy, and
 ## 📊 Results Summary
 
 ### ✅ Parameter Estimation Accuracy
-- Inverse PINN estimated system parameters with **< 6% error**.
+- Inverse PINN estimated system parameters with **< 2% error**.
 - Achieved **RMSE ≈ 0.00285** on test data, even for future time intervals not included in training.
 
 ### 🔮 Generalization Ability
@@ -108,7 +108,7 @@ This project includes several experiments to test the performance, accuracy, and
 - Performance degraded gracefully with increasing noise, especially in damping coefficient (μ).
 
 ### 📉 Data Efficiency
-- High accuracy achieved with **very limited training data** (as few as ~20 samples).
+- High accuracy achieved with **very limited training data** (as few as ~10 samples).
 - Forward PINN required significantly more data and still failed to generalize.
 
 ### ⚖️ Comparison with Multiple Shooting Method
